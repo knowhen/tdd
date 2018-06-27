@@ -1,38 +1,49 @@
 package com.when.tictactoe;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
+public class AppTest {
+    // List mockedList;
+    // LinkedList mockedLinkedList;
+    // TicTacToeCollection collection;
+    //
+    // @Before
+    // public void setUp() {
+    // mockedList = mock(List.class);
+    // mockedLinkedList = mock(LinkedList.class);
+    // collection = mock(TicTacToeCollection.class);
+    // }
+    //
+    // @SuppressWarnings("unchecked")
+    // @Test
+    // public void mockCreation() {
+    // mockedList.add("one");
+    // mockedList.clear();
+    //
+    // verify(mockedList).add("one");
+    // verify(mockedList).clear();
+    // }
+    //
+    // @Test(expected = RuntimeException.class)
+    // public void mockConcreate() {
+    // // stubbing
+    // when(mockedLinkedList.get(0)).thenReturn("first");
+    // when(mockedLinkedList.get(1)).thenThrow(new RuntimeException());
+    //
+    // System.out.println(mockedLinkedList.get(0));
+    // System.out.println(mockedLinkedList.get(1));
+    // System.out.println(mockedLinkedList.get(10));
+    // // verify how many times get(0) was invoked
+    // verify(mockedLinkedList).get(0);
+    //
+    // }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
+    // @Test
+    // public void test() {
+    // assertThat(collection.drop()).isFalse();
+    // doReturn(true).when(collection).drop();
+    // assertThat(collection.drop()).isTrue();
+    // }
 }
