@@ -23,4 +23,29 @@ public class Variable implements Segment {
 		return name.equals(((Variable) other).name);
 	}
 
+	@Override
+	public boolean isVariable() {
+		return true;
+	}
+
+	@Override
+	public Variable asVariable() {
+		return this;
+	}
+
+	@Override
+	public boolean isPlainText() {
+		return false;
+	}
+
+	@Override
+	public PlainText asPlainText() {
+		throw new RuntimeException("Can't turn an Variable to a PlainText");
+	}
+
+	@Override
+	public String toString() {
+		return "Variable [name=" + name + "]";
+	}
+
 }

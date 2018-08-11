@@ -13,34 +13,32 @@ import java.util.regex.Pattern;
 public class TemplateParser {
 
 	public List<Segment> parseSegments(String template) {
-		List<Segment> segments = new ArrayList<>();
-		List<String> strings = parse(template);
-		for(String s : strings) {
-			if(isVariable(s)) {
-				String name = s.substring(2, s.length() - 1);
-				segments.add(new Variable(name));
+		 List<Segment> segments = parse(template);
+		 for(Segment segment : segments) {
+			if(segment.isVariable()) {
+				segments.add(segment.asVariable());
 			} else {
-				segments.add(new PlainText(s));
+				segments.add(segment.asPlainText());
 			}
 		}
 		return segments;
 	}
 	
-	private List<String> parse(String template) {
-		List<String> segments = new ArrayList<>();
+	private List<Segment> parse(String template) {
+		List<Segment> segments = new ArrayList<>();
 		int index = collectSegments(segments, template);
 		addTail(segments, template, index);
 		addEmptyStringIfTemplateWasEmpty(segments);
 		return segments;
 	}
-
+	
 	/**
 	 * 
 	 * @param segments
 	 * @param src
 	 * @return
 	 */
-	private int collectSegments(List<String> segments, String src) {
+	private int collectSegments(List<Segment> segments, String src) {
 		// 匹配${variable}
 		Pattern pattern = Pattern.compile("\\$\\{[^}]*\\}");
 		Matcher matcher = pattern.matcher(src);
@@ -55,39 +53,29 @@ public class TemplateParser {
 	}
 
 	// 添加纯文本部分
-	private void addPrecedingPlainText(List<String> segments, String src, Matcher matcher, int index) {
+	private void addPrecedingPlainText(List<Segment> segments, String src, Matcher matcher, int index) {
 		if (index != matcher.start()) {
-			segments.add(src.substring(index, matcher.start()));
+			segments.add(new PlainText(src.substring(index, matcher.start())));
 		}
 	}
 
 	// 添加变量
-	private void addVariable(List<String> segments, String src, Matcher matcher) {
-		segments.add(src.substring(matcher.start(), matcher.end()));
+	private void addVariable(List<Segment> segments, String src, Matcher matcher) {
+		segments.add(new Variable(src.substring(matcher.start(), matcher.end())));
 	}
 
 	// 如果结尾部分还有纯文本，附加
-	private void addTail(List<String> segments, String template, int index) {
+	private void addTail(List<Segment> segments, String template, int index) {
 		if (index < template.length()) {
-			segments.add(template.substring(index));
+			segments.add(new PlainText(template.substring(index)));
 		}
 	}
 
 	//模板为空时添加空字符串
-	private void addEmptyStringIfTemplateWasEmpty(List<String> segments) {
+	private void addEmptyStringIfTemplateWasEmpty(List<Segment> segments) {
 		if (segments.isEmpty()) {
-			segments.add("");
+			segments.add(new PlainText(""));
 		}
 	}
 	
-	/**
-	 * 判断该文本片段是否为需要赋值的变量
-	 * 
-	 * @param segment
-	 *            文本片段
-	 * @return
-	 */
-	private boolean isVariable(String segment) {
-		return segment.startsWith("${") && segment.endsWith("}");
-	}
 }
