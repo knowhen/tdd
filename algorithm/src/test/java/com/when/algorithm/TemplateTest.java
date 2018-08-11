@@ -3,7 +3,6 @@ package com.when.algorithm;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -39,7 +38,6 @@ public class TemplateTest {
 		 new Template("${foo}").evaluate();
 	}
 	
-	@Ignore
 	@Test
 	public void getProcessedJustOnce() throws Exception {
 		template.set("one", "${one}");
@@ -51,5 +49,4 @@ public class TemplateTest {
 	private void assertTemplateEvaluatesTo(String expected) {
 		assertEquals(expected, template.evaluate());
 	}
-
 }

@@ -11,20 +11,8 @@ import java.util.regex.Pattern;
  *
  */
 public class TemplateParser {
-
-	public List<Segment> parseSegments(String template) {
-		 List<Segment> segments = parse(template);
-		 for(Segment segment : segments) {
-			if(segment.isVariable()) {
-				segments.add(segment.asVariable());
-			} else {
-				segments.add(segment.asPlainText());
-			}
-		}
-		return segments;
-	}
 	
-	private List<Segment> parse(String template) {
+	public List<Segment> parseSegments(String template) {
 		List<Segment> segments = new ArrayList<>();
 		int index = collectSegments(segments, template);
 		addTail(segments, template, index);
@@ -61,7 +49,7 @@ public class TemplateParser {
 
 	// 添加变量
 	private void addVariable(List<Segment> segments, String src, Matcher matcher) {
-		segments.add(new Variable(src.substring(matcher.start(), matcher.end())));
+		segments.add(new Variable(src.substring(matcher.start() + 2, matcher.end() - 1)));
 	}
 
 	// 如果结尾部分还有纯文本，附加

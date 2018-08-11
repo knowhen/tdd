@@ -5,8 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ PlainTextTest.class, TemplateParserTest.class, TemplatePerformanceTest.class, TemplateTest.class,
-		VariableTest.class })
+@SuiteClasses({ PlainTextTest.class, TemplateParserTest.class, TemplateTest.class, VariableTest.class })
 public class AllTests {
 
 }
